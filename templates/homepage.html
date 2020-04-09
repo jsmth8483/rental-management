@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type=text/css href="{{url_for('static',
+		filename='styles.css')}}">
+		<title>Rental Management | Home</title>
+	</head>
+	<body>
+		<div class="topnav">
+			<a class="active" href="{{url_for('home')}}">Home</a>
+			<a href="{{url_for('showProperties')}}">Properties</a>
+			<a href="{{url_for('showTenants')}}">Tenants</a>
+		</div>
+		<div id="home-properties">
+			<h1>Properties</h1>
+			{% if properties %} {% for property in properties %}
+			<div>
+				<span>{{property.nickname}}</span>
+				<span>{{property.address}}</span>
+			</div>
+			{% endfor %} {% endif %}
+		</div>
+		<div id="home-tenants">
+			<h1>Tenants</h1>
+			{% if tenants %} {% for tenant in tenants %}
+			<div>
+				<span>{{tenant.name}}</span>
+				<span>{{tenant.phone}}</span>
+			</div>
+			{% endfor %} {% endif %}
+		</div>
+	</body>
+</html>

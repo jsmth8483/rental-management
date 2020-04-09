@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type=text/css href="{{url_for('static',
+		filename='styles.css')}}">
+		<title>Rental Management | Properties</title>
+	</head>
+	<body>
+		<div class="topnav">
+			<a href="{{url_for('home')}}">Home</a>
+			<a class="active" href="{{url_for('showProperties')}}">Properties</a>
+			<a href="{{url_for('showTenants')}}">Tenants</a>
+		</div>
+	</body>
+</html>
