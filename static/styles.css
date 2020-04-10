@@ -19,7 +19,7 @@ body {
 }
 
 .topnav a:hover {
-	background-color: #ddd;
+	background-color: darkgray;
 	color: black;
 }
 
@@ -30,4 +30,12 @@ body {
 
 .topnav .icon {
 	display: none;
+}
+
+.homepage-header a {
+	text-decoration: none;
+	color: black;
+}
+.homepage-header a:hover {
+	color: darkgrey;
 }

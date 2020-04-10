@@ -11,5 +11,14 @@
 			<a class="active" href="{{url_for('showProperties')}}">Properties</a>
 			<a href="{{url_for('showTenants')}}">Tenants</a>
 		</div>
+		<div id="home-properties">
+			<h1>Properties</h1>
+			{% if properties %} {% for property in properties %}
+			<div>
+				<span>{{property.nickname}}</span>
+				<span>{{property.address}}</span>
+			</div>
+			{% endfor %} {% endif %}
+		</div>
 	</body>
 </html>

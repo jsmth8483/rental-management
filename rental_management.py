@@ -10,7 +10,7 @@ Base.metadata.bind = engine
 
 
 @app.route('/')
-@app.route('/home')
+@app.route('/home/')
 def home():
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
@@ -19,14 +19,29 @@ def home():
     return render_template('homepage.html', properties=properties, tenants=tenants)
 
 
-@app.route('/properties')
+@app.route('/properties/')
 def showProperties():
-    return render_template("properties.html")
+    DBSession = sessionmaker(bind=engine)
+    session = DBSession()
+    properties = session.query(Property).all()
+    tenants = session.query(Tenant).all()
+    return render_template("properties.html", properties=properties)
 
 
-@app.route('/tenants')
+@app.route('/tenants/')
 def showTenants():
-    return render_template("tenants.html")
+    DBSession = sessionmaker(bind=engine)
+    session = DBSession()
+    tenants = session.query(Tenant).all()
+    return render_template("tenants.html", tenants=tenants)
+
+
+@app.route('/property/<int:property_id>/')
+def showProperty(property_id):
+    DBSession = sessionmaker(bind=engine)
+    session = DBSession()
+    property = session.query(Property).filter_by(id=property_id).one()
+    return render_template("property.html")
 
 
 if __name__ == '__main__':

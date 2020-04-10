@@ -12,7 +12,9 @@
 			<a href="{{url_for('showTenants')}}">Tenants</a>
 		</div>
 		<div id="home-properties">
-			<h1>Properties</h1>
+			<h1 class="homepage-header">
+				<a href="{{url_for('showProperties')}}">Properties</a>
+			</h1>
 			{% if properties %} {% for property in properties %}
 			<div>
 				<span>{{property.nickname}}</span>
@@ -21,7 +23,9 @@
 			{% endfor %} {% endif %}
 		</div>
 		<div id="home-tenants">
-			<h1>Tenants</h1>
+			<h1 class="homepage-header">
+				<a href="{{url_for('showTenants')}}">Tenants</a>
+			</h1>
 			{% if tenants %} {% for tenant in tenants %}
 			<div>
 				<span>{{tenant.name}}</span>
