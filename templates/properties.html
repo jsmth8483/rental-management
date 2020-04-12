@@ -13,10 +13,14 @@
 		</div>
 		<div id="home-properties">
 			<h1>Properties</h1>
+			<p><a href="{{url_for('newProperty')}}">Add New Property</a></p>
 			{% if properties %} {% for property in properties %}
 			<div>
-				<span>{{property.nickname}}</span>
-				<span>{{property.address}}</span>
+				<p class="property-nickname">{{property.nickname}}</p>
+				<p class="property-address">{{property.address}}</p>
+				<a href="{{url_for('propertyDetails', property_id=property.id)}}"
+					>View</a
+				>
 			</div>
 			{% endfor %} {% endif %}
 		</div>

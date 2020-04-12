@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type=text/css href="{{url_for('static',
+		filename='styles.css')}}">
+		<title>Overview: {{property.nickname}}</title>
+	</head>
+	<body>
+		<div class="topnav">
+			<a href="{{url_for('home')}}">Home</a>
+			<a class="active" href="{{url_for('showProperties')}}">Properties</a>
+			<a href="{{url_for('showTenants')}}">Tenants</a>
+		</div>
+		<div>
+			<p>{{property.nickname}}</p>
+			<p>{{property.address}}</p>
+		</div>
+		<div>
+			<h2>Tenants</h2>
+			{% for tenant in tenants %}
+			<p>Name: {{tenant.name}}</p>
+			<p>Contact: {{tenant.phone}}</p>
+			{% endfor %}
+			<a href="{{url_for('newTenant', property_id=property.id)}}">Add Tenant</a>
+		</div>
+	</body>
+</html>

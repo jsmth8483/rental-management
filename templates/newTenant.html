@@ -11,15 +11,17 @@
 			<a href="{{url_for('showProperties')}}">Properties</a>
 			<a class="active" href="{{url_for('showTenants')}}">Tenants</a>
 		</div>
-		<div id="home-tenants">
-			<h1>Tenants</h1>
-			{% if tenants %} {% for tenant in tenants %}
-			<div>
-				<p class="tenant-name">{{tenant.name}}</p>
-				<p class="tenant-phone">{{tenant.phone}}</p>
-				<a href="#">View</a>
-			</div>
-			{% endfor %} {% endif %}
-		</div>
+		<h1>Address: {{property.address}}</h1>
+		<h2>Add New Tenant</h2>
+		<form
+			action="{{url_for('newTenant', property_id=property.id)}}"
+			method="POST"
+		>
+			<p>Name: <input type="text" name="name" placeholder="Name" /></p>
+			<p>
+				Contact: <input type="text" name="phone" placeholder="Phone Number" />
+			</p>
+			<input type="submit" value="Add" />
+		</form>
 	</body>
 </html>

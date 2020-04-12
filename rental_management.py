@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request, redirect
 from database_setup import Property, Tenant, Base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -37,11 +37,39 @@ def showTenants():
 
 
 @app.route('/property/<int:property_id>/')
-def showProperty(property_id):
+def propertyDetails(property_id):
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
     property = session.query(Property).filter_by(id=property_id).one()
-    return render_template("property.html")
+    tenants = session.query(Tenant).filter_by(property_id=property_id).all()
+    return render_template("property.html", property=property, tenants=tenants)
+
+
+@app.route('/property/new/', methods=['GET', 'POST'])
+def newProperty():
+    if request.method == 'POST':
+        DBSession = sessionmaker(bind=engine)
+        session = DBSession()
+        newProperty = Property(
+            nickname=request.form['nickname'], address=request.form['address'])
+        session.add(newProperty)
+        session.commit()
+        return redirect(url_for('propertyDetails', property_id=newProperty.id))
+    return render_template('newProperty.html')
+
+
+@app.route('/property/<int:property_id>/tenants/new/', methods=['GET', 'POST'])
+def newTenant(property_id):
+    DBSession = sessionmaker(bind=engine)
+    session = DBSession()
+    property = session.query(Property).filter_by(id=property_id).one()
+    if request.method == 'POST':
+        newTenant = Tenant(
+            name=request.form['name'], phone=request.form['phone'], property_id=property_id)
+        session.add(newTenant)
+        session.commit()
+        return redirect(url_for('propertyDetails', property_id=property_id))
+    return render_template('newTenant.html', property=property)
 
 
 if __name__ == '__main__':
