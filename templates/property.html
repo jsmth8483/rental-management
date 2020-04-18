@@ -15,6 +15,11 @@
 			<p>{{property.nickname}}</p>
 			<p>{{property.address}}</p>
 		</div>
+		<p>
+			<a href="{{url_for('editProperty', property_id=property.id)}}"
+				>Edit Details</a
+			>
+		</p>
 		<div>
 			<h2>Tenants</h2>
 			{% for tenant in tenants %}

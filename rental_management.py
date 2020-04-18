@@ -58,6 +58,20 @@ def newProperty():
     return render_template('newProperty.html')
 
 
+@app.route('/property/<int:property_id>/edit', methods=['GET', 'POST'])
+def editProperty(property_id):
+    DBSession = sessionmaker(bind=engine)
+    session = DBSession()
+    property = session.query(Property).filter_by(id=property_id).one()
+    if request.method == 'POST':
+        property.nickname = request.form['nickname']
+        property.address = request.form['address']
+        session.add(property)
+        session.commit()
+        return redirect(url_for('propertyDetails', property_id=property_id))
+    return render_template('editProperty.html', property=property)
+
+
 @app.route('/property/<int:property_id>/tenants/new/', methods=['GET', 'POST'])
 def newTenant(property_id):
     DBSession = sessionmaker(bind=engine)

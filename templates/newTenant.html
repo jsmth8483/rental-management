@@ -22,6 +22,9 @@
 				Contact: <input type="text" name="phone" placeholder="Phone Number" />
 			</p>
 			<input type="submit" value="Add" />
+			<a href="{{url_for('propertyDetails', property_id=property.id)}}"
+				>Cancel</a
+			>
 		</form>
 	</body>
 </html>
