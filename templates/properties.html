@@ -16,8 +16,14 @@
 			<p><a href="{{url_for('newProperty')}}">Add New Property</a></p>
 			{% if properties %} {% for property in properties %}
 			<div>
-				<p class="property-nickname">{{property.nickname}}</p>
-				<p class="property-address">{{property.address}}</p>
+				<p>{{property.title}}</p>
+				<p>{{property.streetAddress}}</p>
+				{% if property.unitNumber != None %}
+				<p>{{property.unitNumber}}</p>
+				{% endif %}
+				<p>{{property.city}}</p>
+				<p>{{property.state}}</p>
+				<p>{{property.zipCode}}</p>
 				<a href="{{url_for('propertyDetails', property_id=property.id)}}"
 					>View</a
 				>

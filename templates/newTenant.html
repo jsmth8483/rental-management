@@ -19,7 +19,11 @@
 		>
 			<p>Name: <input type="text" name="name" placeholder="Name" /></p>
 			<p>
-				Contact: <input type="text" name="phone" placeholder="Phone Number" />
+				Phone Number:
+				<input type="text" name="phone" placeholder="Phone Number" />
+			</p>
+			<p>
+				Email Address: <input type="text" name="email" placeholder="Email" />
 			</p>
 			<input type="submit" value="Add" />
 			<a href="{{url_for('propertyDetails', property_id=property.id)}}"
