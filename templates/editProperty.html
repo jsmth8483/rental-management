@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Create New Property</title>
+	</head>
+	<body>
+		<h1>Edit Property: {{property.address}}</h1>
+		<form
+			action="{{url_for('editProperty', property_id=property.id)}}"
+			method="POST"
+		>
+			<p>
+				Nickname (optional): {% if property.nickname != '' %}
+				<input
+					type="text"
+					name="nickname"
+					placeholder="{{property.nickname}}"
+					value="{{property.nickname}}"
+				/>
+				{% else %}
+				<input type="text" name="nickname" placeholder="Nickname" />
+				{% endif %}
+			</p>
+			<p>
+				Address:
+				<input
+					type="text"
+					name="address"
+					placeholder="Address"
+					value="{{property.address}}"
+					required
+				/>
+			</p>
+			<p>
+				<input type="submit" value="Submit" />
+				<a href="{{url_for('propertyDetails', property_id=property.id)}}"
+					>Cancel</a
+				>
+			</p>
+		</form>
+	</body>
+</html>
