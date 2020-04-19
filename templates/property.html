@@ -30,8 +30,13 @@
 			<p>Name: {{tenant.name}}</p>
 			<p>Phone Number: {{tenant.phone}}</p>
 			<p>Email: {{tenant.email}}</p>
+			<a href="{{url_for('editTenant', tenant_id=tenant.id)}}">Edit</a>
 			{% endfor %}
-			<a href="{{url_for('newTenant', property_id=property.id)}}">Add Tenant</a>
+			<p>
+				<a href="{{url_for('newTenant', property_id=property.id)}}"
+					>Add Tenant</a
+				>
+			</p>
 		</div>
 	</body>
 </html>

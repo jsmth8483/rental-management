@@ -91,6 +91,21 @@ def newTenant(property_id):
     return render_template('newTenant.html', property=property)
 
 
+@app.route('/tenant/<int:tenant_id>/edit', methods=['GET', 'POST'])
+def editTenant(tenant_id):
+    DBSession = sessionmaker(bind=engine)
+    session = DBSession()
+    tenant = session.query(Tenant).filter_by(id=tenant_id).one()
+    if request.method == 'POST':
+        tenant.name = request.form['name']
+        tenant.phone = request.form['phone']
+        tenant.email = request.form['email']
+        session.add(tenant)
+        session.commit()
+        return redirect(url_for('propertyDetails', property_id=tenant.property.id))
+    return render_template('editTenant.html', tenant=tenant)
+
+
 if __name__ == '__main__':
     app.debug = True
     app.run(host='0.0.0.0', port=5000)
