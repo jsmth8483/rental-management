@@ -65,8 +65,12 @@ def editProperty(property_id):
     session = DBSession()
     property = session.query(Property).filter_by(id=property_id).one()
     if request.method == 'POST':
-        property.nickname = request.form['nickname']
-        property.address = request.form['address']
+        property.title = request.form['title']
+        property.streetAddress = request.form['streetAddress']
+        property.unitNumber = request.form['unitNumber']
+        property.city = request.form['city']
+        property.zipCode = request.form['zipCode']
+        property.state = request.form['state']
         session.add(property)
         session.commit()
         return redirect(url_for('propertyDetails', property_id=property_id))
