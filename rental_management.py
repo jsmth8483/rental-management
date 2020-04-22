@@ -106,6 +106,23 @@ def editTenant(tenant_id):
     return render_template('editTenant.html', tenant=tenant)
 
 
+@app.route('/property/<int:property_id>/delete/', methods=['GET', 'POST'])
+def deleteProperty(property_id):
+    DBSession = sessionmaker(bind=engine)
+    session = DBSession()
+    property = session.query(Property).filter_by(id=property_id).one()
+    if request.method == 'POST':
+       # tenants = session.query(Tenant).filter_by(
+       #     property_id=property_id).all()
+        # for tenant in tenants:
+       #     session.delete(tenant)
+        session.delete(property)
+        session.commit()
+        return redirect(url_for('showProperties'))
+
+    return render_template('deleteProperty.html', property=property)
+
+
 @app.route('/tenant/<int:tenant_id>/delete/', methods=['GET', 'POST'])
 def deleteTenant(tenant_id):
     DBSession = sessionmaker(bind=engine)

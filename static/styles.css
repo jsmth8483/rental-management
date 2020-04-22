@@ -39,3 +39,7 @@ body {
 .homepage-header a:hover {
 	color: darkgrey;
 }
+
+.warning {
+	color: red;
+}
