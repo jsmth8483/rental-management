@@ -112,10 +112,10 @@ def deleteProperty(property_id):
     session = DBSession()
     property = session.query(Property).filter_by(id=property_id).one()
     if request.method == 'POST':
-       # tenants = session.query(Tenant).filter_by(
-       #     property_id=property_id).all()
-        # for tenant in tenants:
-       #     session.delete(tenant)
+        tenants = session.query(Tenant).filter_by(
+            property_id=property_id).all()
+        for tenant in tenants:
+            session.delete(tenant)
         session.delete(property)
         session.commit()
         return redirect(url_for('showProperties'))
