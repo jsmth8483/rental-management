@@ -31,6 +31,7 @@
 			<p>Phone Number: {{tenant.phone}}</p>
 			<p>Email: {{tenant.email}}</p>
 			<a href="{{url_for('editTenant', tenant_id=tenant.id)}}">Edit</a>
+			<a href="{{url_for('deleteTenant', tenant_id=tenant.id)}}">Delete</a>
 			{% endfor %}
 			<p>
 				<a href="{{url_for('newTenant', property_id=property.id)}}"
