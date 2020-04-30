@@ -11,7 +11,7 @@ Base.metadata.bind = engine
 
 @app.route('/')
 @app.route('/home/')
-def home():
+def home() -> 'html':
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
     properties = session.query(Property).all()
@@ -20,7 +20,7 @@ def home():
 
 
 @app.route('/properties/')
-def showProperties():
+def showProperties() -> 'html':
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
     properties = session.query(Property).all()
@@ -29,7 +29,7 @@ def showProperties():
 
 
 @app.route('/tenants/')
-def showTenants():
+def showTenants() -> 'html':
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
     tenants = session.query(Tenant).all()
@@ -37,7 +37,7 @@ def showTenants():
 
 
 @app.route('/property/<int:property_id>/')
-def propertyDetails(property_id):
+def propertyDetails(property_id: int) -> 'html':
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
     property = session.query(Property).filter_by(id=property_id).one()
@@ -46,7 +46,7 @@ def propertyDetails(property_id):
 
 
 @app.route('/property/new/', methods=['GET', 'POST'])
-def newProperty():
+def newProperty() -> 'html':
     if request.method == 'POST':
         DBSession = sessionmaker(bind=engine)
         session = DBSession()
@@ -60,7 +60,7 @@ def newProperty():
 
 
 @app.route('/property/<int:property_id>/edit', methods=['GET', 'POST'])
-def editProperty(property_id):
+def editProperty(property_id: int) -> 'html':
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
     property = session.query(Property).filter_by(id=property_id).one()
@@ -78,7 +78,7 @@ def editProperty(property_id):
 
 
 @app.route('/property/<int:property_id>/tenants/new/', methods=['GET', 'POST'])
-def newTenant(property_id):
+def newTenant(property_id: int) -> 'html':
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
     property = session.query(Property).filter_by(id=property_id).one()
@@ -92,7 +92,7 @@ def newTenant(property_id):
 
 
 @app.route('/tenant/<int:tenant_id>/edit/', methods=['GET', 'POST'])
-def editTenant(tenant_id):
+def editTenant(tenant_id: int) -> 'html':
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
     tenant = session.query(Tenant).filter_by(id=tenant_id).one()
@@ -107,7 +107,7 @@ def editTenant(tenant_id):
 
 
 @app.route('/property/<int:property_id>/delete/', methods=['GET', 'POST'])
-def deleteProperty(property_id):
+def deleteProperty(property_id: int) -> 'html':
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
     property = session.query(Property).filter_by(id=property_id).one()
@@ -124,7 +124,7 @@ def deleteProperty(property_id):
 
 
 @app.route('/tenant/<int:tenant_id>/delete/', methods=['GET', 'POST'])
-def deleteTenant(tenant_id):
+def deleteTenant(tenant_id: int) -> 'html':
     DBSession = sessionmaker(bind=engine)
     session = DBSession()
     tenant = session.query(Tenant).filter_by(id=tenant_id).one()
