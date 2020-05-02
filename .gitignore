@@ -1,3 +1,4 @@
 .vscode
 database_test.py
 rentalmanagement.db
+.env
