@@ -1,43 +1,36 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<link rel="stylesheet" type=text/css href="{{url_for('static',
-		filename='styles.css')}}">
-		<title>Rental Management | Property Details</title>
-	</head>
-	<body>
-		<div class="topnav">
-			<a href="{{url_for('home')}}">Home</a>
-			<a class="active" href="{{url_for('showProperties')}}">Properties</a>
-			<a href="{{url_for('showTenants')}}">Tenants</a>
-		</div>
-		<div>
-			<p>{{property.title}}</p>
-			<p>{{property.streetAddress}}</p>
-			<p>{{property.unitNumber}}</p>
-			<p>{{property.city}}</p>
-			<p>{{property.state}}</p>
-			<p>{{property.zipCode}}</p>
-		</div>
-		<p>
-			<a href="{{url_for('editProperty', property_id=property.id)}}"
-				>Edit Details</a
-			>
-		</p>
-		<div>
-			<h2>Tenants</h2>
-			{% for tenant in tenants %}
-			<p>Name: {{tenant.name}}</p>
-			<p>Phone Number: {{tenant.phone}}</p>
-			<p>Email: {{tenant.email}}</p>
-			<a href="{{url_for('editTenant', tenant_id=tenant.id)}}">Edit</a>
-			<a href="{{url_for('deleteTenant', tenant_id=tenant.id)}}">Delete</a>
-			{% endfor %}
-			<p>
-				<a href="{{url_for('newTenant', property_id=property.id)}}"
-					>Add Tenant</a
-				>
-			</p>
-		</div>
-	</body>
-</html>
+{% extends 'base.html' %} {% block nav %}
+
+<div class="topnav">
+	<a href="{{url_for('home')}}">Home</a>
+	<a class="active" href="{{url_for('showProperties')}}">Properties</a>
+	<a href="{{url_for('showTenants')}}">Tenants</a>
+</div>
+{% endblock %} {% block body %}
+
+<div>
+	<p>{{property.title}}</p>
+	<p>{{property.streetAddress}}</p>
+	<p>{{property.unitNumber}}</p>
+	<p>{{property.city}}</p>
+	<p>{{property.state}}</p>
+	<p>{{property.zipCode}}</p>
+</div>
+<p>
+	<a href="{{url_for('editProperty', property_id=property.id)}}"
+		>Edit Details</a
+	>
+</p>
+<div>
+	<h2>Tenants</h2>
+	{% for tenant in tenants %}
+	<p>Name: {{tenant.name}}</p>
+	<p>Phone Number: {{tenant.phone}}</p>
+	<p>Email: {{tenant.email}}</p>
+	<a href="{{url_for('editTenant', tenant_id=tenant.id)}}">Edit</a>
+	<a href="{{url_for('deleteTenant', tenant_id=tenant.id)}}">Delete</a>
+	{% endfor %}
+	<p>
+		<a href="{{url_for('newTenant', property_id=property.id)}}">Add Tenant</a>
+	</p>
+</div>
+{% endblock %}

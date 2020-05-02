@@ -1,34 +1,27 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<link rel="stylesheet" type=text/css href="{{url_for('static',
-		filename='styles.css')}}">
-		<title>Rental Management | Properties</title>
-	</head>
-	<body>
-		<div class="topnav">
-			<a href="{{url_for('home')}}">Home</a>
-			<a class="active" href="{{url_for('showProperties')}}">Properties</a>
-			<a href="{{url_for('showTenants')}}">Tenants</a>
-		</div>
-		<div id="home-properties">
-			<h1>Properties</h1>
-			<p><a href="{{url_for('newProperty')}}">Add New Property</a></p>
-			{% if properties %} {% for property in properties %}
-			<div>
-				<p>{{property.title}}</p>
-				<p>{{property.streetAddress}}</p>
-				{% if property.unitNumber != None %}
-				<p>{{property.unitNumber}}</p>
-				{% endif %}
-				<p>{{property.city}}</p>
-				<p>{{property.state}}</p>
-				<p>{{property.zipCode}}</p>
-				<a href="{{url_for('propertyDetails', property_id=property.id)}}"
-					>View</a
-				>
-			</div>
-			{% endfor %} {% endif %}
-		</div>
-	</body>
-</html>
+{% extends 'base.html' %} {% block nav %}
+
+<div class="topnav">
+	<a href="{{url_for('home')}}">Home</a>
+	<a class="active" href="{{url_for('showProperties')}}">Properties</a>
+	<a href="{{url_for('showTenants')}}">Tenants</a>
+</div>
+{% endblock %} {% block body %}
+
+<div id="home-properties">
+	<h1>Properties</h1>
+	<p><a href="{{url_for('newProperty')}}">Add New Property</a></p>
+	{% if properties %} {% for property in properties %}
+	<div>
+		<p>{{property.title}}</p>
+		<p>{{property.streetAddress}}</p>
+		{% if property.unitNumber != None %}
+		<p>{{property.unitNumber}}</p>
+		{% endif %}
+		<p>{{property.city}}</p>
+		<p>{{property.state}}</p>
+		<p>{{property.zipCode}}</p>
+		<a href="{{url_for('propertyDetails', property_id=property.id)}}">View</a>
+	</div>
+	{% endfor %} {% endif %}
+</div>
+{% endblock %}

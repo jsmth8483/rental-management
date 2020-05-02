@@ -1,132 +1,128 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<link rel="stylesheet" type=text/css href="{{url_for('static',
-		filename='styles.css')}}">
-		<title>Rental Management | Edit Property</title>
-	</head>
-	<body>
-		<div class="topnav">
-			<a href="{{url_for('home')}}">Home</a>
-			<a class="active" href="{{url_for('showProperties')}}">Properties</a>
-			<a href="{{url_for('showTenants')}}">Tenants</a>
-		</div>
-		<h1>Edit Property: {{property.streetAddress}}</h1>
-		<form
-			action="{{url_for('editProperty', property_id=property.id)}}"
-			method="POST"
+{% extends 'base.html' %} {% block nav %}
+
+<div class="topnav">
+	<a href="{{url_for('home')}}">Home</a>
+	<a class="active" href="{{url_for('showProperties')}}">Properties</a>
+	<a href="{{url_for('showTenants')}}">Tenants</a>
+</div>
+{% endblock %} {% block body %}
+
+<h1>Edit Property: {{property.streetAddress}}</h1>
+<form
+	action="{{url_for('editProperty', property_id=property.id)}}"
+	method="POST"
+>
+	<p>
+		Title (optional): {% if property.title != '' %}
+		<input
+			type="text"
+			name="title"
+			placeholder="{{property.title}}"
+			value="{{property.title}}"
+		/>
+		{% else %}
+		<input type="text" name="title" placeholder="Title" />
+		{% endif %}
+	</p>
+	<p>
+		Street Address:
+		<input
+			type="text"
+			name="streetAddress"
+			placeholder="Street Address"
+			value="{{property.streetAddress}}"
+			required
+		/>
+		Apt / Suite / Other: {% if property.unitNumber != None %}
+		<input
+			type="text"
+			name="unitNumber"
+			placeholder="Apt / Suite / Other"
+			value="{{property.unitNumber}}"
+		/>
+		{% else %}
+		<input
+			type="text"
+			name="unitNumber"
+			placeholder="Apt / Suite / Other"
+		/>
+		{% endif %}
+	</p>
+	<p>
+		City:
+		<input
+			type="text"
+			name="city"
+			placeholder="City"
+			value="{{property.city}}"
+			required
+		/>
+
+		State:
+		<select name="state" required>
+			<option value="AL" {% if property.state == 'AL' %} selected {% endif %}>Alabama</option>
+			<option value="AK" {% if property.state == 'AK' %} selected {% endif %}>Alaska</option>
+			<option value="AZ" {% if property.state == 'AZ' %} selected {% endif %}>Arizona</option>
+			<option value="AR" {% if property.state == 'AR' %} selected {% endif %}>Arkansas</option>
+			<option value="CA" {% if property.state == 'CA' %} selected {% endif %}>California</option>
+			<option value="CO" {% if property.state == 'CO' %} selected {% endif %}>Colorado</option>
+			<option value="CT" {% if property.state == 'CT' %} selected {% endif %}>Connecticut</option>
+			<option value="DE" {% if property.state == 'DE' %} selected {% endif %}>Delaware</option>
+			<option value="DC" {% if property.state == 'DC' %} selected {% endif %}>District Of Columbia</option>
+			<option value="FL" {% if property.state == 'FL' %} selected {% endif %}>Florida</option>
+			<option value="GA" {% if property.state == 'GA' %} selected {% endif %}>Georgia</option>
+			<option value="HI" {% if property.state == 'HI' %} selected {% endif %}>Hawaii</option>
+			<option value="ID" {% if property.state == 'ID' %} selected {% endif %}>Idaho</option>
+			<option value="IL" {% if property.state == 'IL' %} selected {% endif %}>Illinois</option>
+			<option value="IN" {% if property.state == 'IN' %} selected {% endif %}>Indiana</option>
+			<option value="IA" {% if property.state == 'IA' %} selected {% endif %}>Iowa</option>
+			<option value="KS" {% if property.state == 'KS' %} selected {% endif %}>Kansas</option>
+			<option value="KY" {% if property.state == 'KY' %} selected {% endif %}>Kentucky</option>
+			<option value="LA" {% if property.state == 'LA' %} selected {% endif %}>Louisiana</option>
+			<option value="ME" {% if property.state == 'ME' %} selected {% endif %}>Maine</option>
+			<option value="MD" {% if property.state == 'MD' %} selected {% endif %}>Maryland</option>
+			<option value="MA" {% if property.state == 'MA' %} selected {% endif %}>Massachusetts</option>
+			<option value="MI" {% if property.state == 'MI' %} selected {% endif %}>Michigan</option>
+			<option value="MN" {% if property.state == 'MN' %} selected {% endif %}>Minnesota</option>
+			<option value="MS" {% if property.state == 'MS' %} selected {% endif %}>Mississippi</option>
+			<option value="MO" {% if property.state == 'MO' %} selected {% endif %}>Missouri</option>
+			<option value="MT" {% if property.state == 'MT' %} selected {% endif %}>Montana</option>
+			<option value="NE" {% if property.state == 'NE' %} selected {% endif %}>Nebraska</option>
+			<option value="NV" {% if property.state == 'NV' %} selected {% endif %}>Nevada</option>
+			<option value="NH" {% if property.state == 'NH' %} selected {% endif %}>New Hampshire</option>
+			<option value="NJ" {% if property.state == 'NJ' %} selected {% endif %}>New Jersey</option>
+			<option value="NM" {% if property.state == 'NM' %} selected {% endif %}>New Mexico</option>
+			<option value="NY" {% if property.state == 'NY' %} selected {% endif %}>New York</option>
+			<option value="NC" {% if property.state == 'NC' %} selected {% endif %}>North Carolina</option>
+			<option value="ND" {% if property.state == 'ND' %} selected {% endif %}>North Dakota</option>
+			<option value="OH" {% if property.state == 'OH' %} selected {% endif %}>Ohio</option>
+			<option value="OK" {% if property.state == 'OK' %} selected {% endif %}>Oklahoma</option>
+			<option value="OR" {% if property.state == 'OR' %} selected {% endif %}>Oregon</option>
+			<option value="PA" {% if property.state == 'PA' %} selected {% endif %}>Pennsylvania</option>
+			<option value="RI" {% if property.state == 'RI' %} selected {% endif %}>Rhode Island</option>
+			<option value="SC" {% if property.state == 'SC' %} selected {% endif %}>South Carolina</option>
+			<option value="SD" {% if property.state == 'SD' %} selected {% endif %}>South Dakota</option>
+			<option value="TN" {% if property.state == 'TN' %} selected {% endif %}>Tennessee</option>
+			<option value="TX" {% if property.state == 'TX' %} selected {% endif %}>Texas</option>
+			<option value="UT" {% if property.state == 'UT' %} selected {% endif %}>Utah</option>
+			<option value="VT" {% if property.state == 'VT' %} selected {% endif %}>Vermont</option>
+			<option value="VA" {% if property.state == 'VA' %} selected {% endif %}>Virginia</option>
+			<option value="WA" {% if property.state == 'WA' %} selected {% endif %}>Washington</option>
+			<option value="WV" {% if property.state == 'WV' %} selected {% endif %}>West Virginia</option>
+			<option value="WI" {% if property.state == 'WI' %} selected {% endif %}>Wisconsin</option>
+			<option value="WY" {% if property.state == 'WY' %} selected {% endif %}>Wyoming</option>
+		</select>
+		Zip Code:
+		<input type="text" name="zipCode" placeholder="Zip Code" value="{{property.zipCode}}" required />
+	</p>
+
+	<p>
+		<input type="submit" value="Submit" />
+		<a href="{{url_for('propertyDetails', property_id=property.id)}}"
+			>Cancel</a
 		>
-			<p>
-				Title (optional): {% if property.title != '' %}
-				<input
-					type="text"
-					name="title"
-					placeholder="{{property.title}}"
-					value="{{property.title}}"
-				/>
-				{% else %}
-				<input type="text" name="title" placeholder="Title" />
-				{% endif %}
-			</p>
-			<p>
-				Street Address:
-				<input
-					type="text"
-					name="streetAddress"
-					placeholder="Street Address"
-					value="{{property.streetAddress}}"
-					required
-				/>
-				Apt / Suite / Other: {% if property.unitNumber != None %}
-				<input
-					type="text"
-					name="unitNumber"
-					placeholder="Apt / Suite / Other"
-					value="{{property.unitNumber}}"
-				/>
-				{% else %}
-				<input
-					type="text"
-					name="unitNumber"
-					placeholder="Apt / Suite / Other"
-				/>
-				{% endif %}
-			</p>
-			<p>
-				City:
-				<input
-					type="text"
-					name="city"
-					placeholder="City"
-					value="{{property.city}}"
-					required
-				/>
+	</p>
+</form>
+<a href="{{url_for('deleteProperty', property_id=property.id)}}">Delete</a>
+{% endblock %}
 
-				State:
-				<select name="state" required>
-					<option value="AL" {% if property.state == 'AL' %} selected {% endif %}>Alabama</option>
-					<option value="AK" {% if property.state == 'AK' %} selected {% endif %}>Alaska</option>
-					<option value="AZ" {% if property.state == 'AZ' %} selected {% endif %}>Arizona</option>
-					<option value="AR" {% if property.state == 'AR' %} selected {% endif %}>Arkansas</option>
-					<option value="CA" {% if property.state == 'CA' %} selected {% endif %}>California</option>
-					<option value="CO" {% if property.state == 'CO' %} selected {% endif %}>Colorado</option>
-					<option value="CT" {% if property.state == 'CT' %} selected {% endif %}>Connecticut</option>
-					<option value="DE" {% if property.state == 'DE' %} selected {% endif %}>Delaware</option>
-					<option value="DC" {% if property.state == 'DC' %} selected {% endif %}>District Of Columbia</option>
-					<option value="FL" {% if property.state == 'FL' %} selected {% endif %}>Florida</option>
-					<option value="GA" {% if property.state == 'GA' %} selected {% endif %}>Georgia</option>
-					<option value="HI" {% if property.state == 'HI' %} selected {% endif %}>Hawaii</option>
-					<option value="ID" {% if property.state == 'ID' %} selected {% endif %}>Idaho</option>
-					<option value="IL" {% if property.state == 'IL' %} selected {% endif %}>Illinois</option>
-					<option value="IN" {% if property.state == 'IN' %} selected {% endif %}>Indiana</option>
-					<option value="IA" {% if property.state == 'IA' %} selected {% endif %}>Iowa</option>
-					<option value="KS" {% if property.state == 'KS' %} selected {% endif %}>Kansas</option>
-					<option value="KY" {% if property.state == 'KY' %} selected {% endif %}>Kentucky</option>
-					<option value="LA" {% if property.state == 'LA' %} selected {% endif %}>Louisiana</option>
-					<option value="ME" {% if property.state == 'ME' %} selected {% endif %}>Maine</option>
-					<option value="MD" {% if property.state == 'MD' %} selected {% endif %}>Maryland</option>
-					<option value="MA" {% if property.state == 'MA' %} selected {% endif %}>Massachusetts</option>
-					<option value="MI" {% if property.state == 'MI' %} selected {% endif %}>Michigan</option>
-					<option value="MN" {% if property.state == 'MN' %} selected {% endif %}>Minnesota</option>
-					<option value="MS" {% if property.state == 'MS' %} selected {% endif %}>Mississippi</option>
-					<option value="MO" {% if property.state == 'MO' %} selected {% endif %}>Missouri</option>
-					<option value="MT" {% if property.state == 'MT' %} selected {% endif %}>Montana</option>
-					<option value="NE" {% if property.state == 'NE' %} selected {% endif %}>Nebraska</option>
-					<option value="NV" {% if property.state == 'NV' %} selected {% endif %}>Nevada</option>
-					<option value="NH" {% if property.state == 'NH' %} selected {% endif %}>New Hampshire</option>
-					<option value="NJ" {% if property.state == 'NJ' %} selected {% endif %}>New Jersey</option>
-					<option value="NM" {% if property.state == 'NM' %} selected {% endif %}>New Mexico</option>
-					<option value="NY" {% if property.state == 'NY' %} selected {% endif %}>New York</option>
-					<option value="NC" {% if property.state == 'NC' %} selected {% endif %}>North Carolina</option>
-					<option value="ND" {% if property.state == 'ND' %} selected {% endif %}>North Dakota</option>
-					<option value="OH" {% if property.state == 'OH' %} selected {% endif %}>Ohio</option>
-					<option value="OK" {% if property.state == 'OK' %} selected {% endif %}>Oklahoma</option>
-					<option value="OR" {% if property.state == 'OR' %} selected {% endif %}>Oregon</option>
-					<option value="PA" {% if property.state == 'PA' %} selected {% endif %}>Pennsylvania</option>
-					<option value="RI" {% if property.state == 'RI' %} selected {% endif %}>Rhode Island</option>
-					<option value="SC" {% if property.state == 'SC' %} selected {% endif %}>South Carolina</option>
-					<option value="SD" {% if property.state == 'SD' %} selected {% endif %}>South Dakota</option>
-					<option value="TN" {% if property.state == 'TN' %} selected {% endif %}>Tennessee</option>
-					<option value="TX" {% if property.state == 'TX' %} selected {% endif %}>Texas</option>
-					<option value="UT" {% if property.state == 'UT' %} selected {% endif %}>Utah</option>
-					<option value="VT" {% if property.state == 'VT' %} selected {% endif %}>Vermont</option>
-					<option value="VA" {% if property.state == 'VA' %} selected {% endif %}>Virginia</option>
-					<option value="WA" {% if property.state == 'WA' %} selected {% endif %}>Washington</option>
-					<option value="WV" {% if property.state == 'WV' %} selected {% endif %}>West Virginia</option>
-					<option value="WI" {% if property.state == 'WI' %} selected {% endif %}>Wisconsin</option>
-					<option value="WY" {% if property.state == 'WY' %} selected {% endif %}>Wyoming</option>
-				</select>
-				Zip Code:
-				<input type="text" name="zipCode" placeholder="Zip Code" value="{{property.zipCode}}" required />
-			</p>
-
-			<p>
-				<input type="submit" value="Submit" />
-				<a href="{{url_for('propertyDetails', property_id=property.id)}}"
-					>Cancel</a
-				>
-			</p>
-		</form>
-		<a href="{{url_for('deleteProperty', property_id=property.id)}}">Delete</a>
-	</body>
-</html>
