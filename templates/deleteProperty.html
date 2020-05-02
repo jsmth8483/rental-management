@@ -1,25 +1,18 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<link rel="stylesheet" type=text/css href="{{url_for('static',
-		filename='styles.css')}}">
-		<title>Rental Management | Delete Property</title>
-	</head>
-	<body>
-		<div class="topnav">
-			<a href="{{url_for('home')}}">Home</a>
-			<a class="active" href="{{url_for('showProperties')}}">Properties</a>
-			<a href="{{url_for('showTenants')}}">Tenants</a>
-		</div>
-		<h1></h1>
-		<h2>Are you sure you want to delete {{property.streetAddress}}?</h2>
-		<p class="warning">This will remove also all tenants</p>
-		<form
-			action="{{url_for('deleteProperty', property_id=property.id)}}"
-			method="POST"
-		>
-			<input type="submit" value="Delete" />
-			<a href="{{url_for('showProperties')}}">Cancel</a>
-		</form>
-	</body>
-</html>
+{% extends 'base.html' %} {% block nav %}
+<div class="topnav">
+	<a href="{{url_for('home')}}">Home</a>
+	<a class="active" href="{{url_for('showProperties')}}">Properties</a>
+	<a href="{{url_for('showTenants')}}">Tenants</a>
+</div>
+{% endblock %} {% block body %}
+<h1></h1>
+<h2>Are you sure you want to delete {{property.streetAddress}}?</h2>
+<p class="warning">This will remove also all tenants</p>
+<form
+	action="{{url_for('deleteProperty', property_id=property.id)}}"
+	method="POST"
+>
+	<input type="submit" value="Delete" />
+	<a href="{{url_for('showProperties')}}">Cancel</a>
+</form>
+{% endblock %}
