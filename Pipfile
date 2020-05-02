@@ -11,6 +11,8 @@ autopep8 = "*"
 flask = "*"
 sqlalchemy = "*"
 sqlalchemy-media = "*"
+python-dotenv = "*"
+flask-sqlalchemy = "*"
 
 [requires]
 python_version = "3.8"
