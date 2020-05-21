@@ -1,43 +1,54 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, flash, session
 from flask import current_app as app
 from .models import db, Property, Tenant
+from app.forms.login_form import LoginForm
+from app.login import is_logged_in
 
 @app.route('/')
 @app.route('/home/')
+@is_logged_in
 def home() -> 'html':
     
     properties = Property.query.all()
     tenants = Tenant.query.all()
     return render_template('homepage.html', properties=properties, tenants=tenants)
-
+    
+@app.route('/login/', methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        session['logged_in'] = True
+        flash('Welcome, {}'.format(form.username.data))
+        return redirect(url_for('home'))
+    return render_template('login.html', form=form)
 
 @app.route('/properties/')
+@is_logged_in
 def showProperties() -> 'html':
-    
     properties = Property.query.all()
     tenants = Tenant.query.all()
     return render_template("properties.html", properties=properties)
 
 
 @app.route('/tenants/')
+@is_logged_in
 def showTenants() -> 'html':
-
     tenants = Tenant.query.all()
     return render_template("tenants.html", tenants=tenants)
 
 
 @app.route('/property/<int:property_id>/')
+@is_logged_in
 def propertyDetails(property_id: int) -> 'html':
-
     property = Property.query.filter_by(id=property_id).one()
     tenants = Tenant.query.filter_by(property_id=property_id).all()
     return render_template("property.html", property=property, tenants=tenants)
 
 
 @app.route('/property/new/', methods=['GET', 'POST'])
+@is_logged_in
 def newProperty() -> 'html':
     if request.method == 'POST':
-        
         newProperty = Property(
             title=request.form['title'], streetAddress=request.form['streetAddress'], unitNumber=request.form['unitNumber'],
             city=request.form['city'], zipCode=request.form['zipCode'], state=request.form['state'])
@@ -48,8 +59,8 @@ def newProperty() -> 'html':
 
 
 @app.route('/property/<int:property_id>/edit', methods=['GET', 'POST'])
+@is_logged_in
 def editProperty(property_id: int) -> 'html':
-    
     property = Property.query.filter_by(id=property_id).one()
     if request.method == 'POST':
         property.title = request.form['title']
@@ -65,8 +76,8 @@ def editProperty(property_id: int) -> 'html':
 
 
 @app.route('/property/<int:property_id>/tenants/new/', methods=['GET', 'POST'])
+@is_logged_in
 def newTenant(property_id: int) -> 'html':
-    
     property = Property.query.filter_by(id=property_id).one()
     if request.method == 'POST':
         newTenant = Tenant(
@@ -78,8 +89,8 @@ def newTenant(property_id: int) -> 'html':
 
 
 @app.route('/tenant/<int:tenant_id>/edit/', methods=['GET', 'POST'])
+@is_logged_in
 def editTenant(tenant_id: int) -> 'html':
-    
     tenant = Tenant.query.filter_by(id=tenant_id).one()
     if request.method == 'POST':
         tenant.name = request.form['name']
@@ -92,8 +103,8 @@ def editTenant(tenant_id: int) -> 'html':
 
 
 @app.route('/property/<int:property_id>/delete/', methods=['GET', 'POST'])
+@is_logged_in
 def deleteProperty(property_id: int) -> 'html':
-    
     property = Property.query.filter_by(id=property_id).one()
     if request.method == 'POST':
         tenants = Tenant.query.filter_by(
@@ -108,8 +119,8 @@ def deleteProperty(property_id: int) -> 'html':
 
 
 @app.route('/tenant/<int:tenant_id>/delete/', methods=['GET', 'POST'])
+@is_logged_in
 def deleteTenant(tenant_id: int) -> 'html':
-    
     tenant = Tenant.query.filter_by(id=tenant_id).one()
     streetAddress = tenant.property.streetAddress
     if request.method == 'POST':

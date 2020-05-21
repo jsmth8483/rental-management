@@ -6,6 +6,13 @@
 		filename='styles.css')}}">
 	</head>
 	<body>
-		{% block nav %} {% endblock %} {% block body %} {% endblock %}
+		{% block nav %} {% endblock %} {% with messages = get_flashed_messages() %}
+		{% if messages %}
+		<ul type="none" class="message">
+			{% for message in messages %}
+			<li>{{ message }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}{% endwith %}{% block body %} {% endblock %}
 	</body>
 </html>

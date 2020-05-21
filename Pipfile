@@ -13,6 +13,7 @@ sqlalchemy = "*"
 sqlalchemy-media = "*"
 python-dotenv = "*"
 flask-sqlalchemy = "*"
+flask-wtf = "*"
 
 [requires]
 python_version = "3.8"
