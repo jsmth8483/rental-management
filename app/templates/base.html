@@ -6,6 +6,17 @@
 		filename='styles.css')}}">
 	</head>
 	<body>
-		{% block nav %} {% endblock %} {% block body %} {% endblock %}
+		<div class="topnav">
+			<a href="{{url_for('home')}}">Home</a>
+			<a href="{{url_for('showProperties')}}">Properties</a>
+			<a href="{{url_for('showTenants')}}">Tenants</a>
+		</div>
+		{% with messages = get_flashed_messages() %} {% if messages %}
+		<ul type="none" class="message">
+			{% for message in messages %}
+			<li>{{ message }}</li>
+			{% endfor %}
+		</ul>
+		{% endif %}{% endwith %}{% block body %} {% endblock %}
 	</body>
 </html>

@@ -1,11 +1,4 @@
-{% extends 'base.html' %} {% block nav %}
-
-<div class="topnav">
-	<a href="{{url_for('home')}}">Home</a>
-	<a class="active" href="{{url_for('showProperties')}}">Properties</a>
-	<a href="{{url_for('showTenants')}}">Tenants</a>
-</div>
-{% endblock %} {% block body %}
+{% extends 'base.html' %} {% block body %}
 
 <h1>Edit Property: {{property.streetAddress}}</h1>
 <form
