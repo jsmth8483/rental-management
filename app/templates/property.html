@@ -1,16 +1,11 @@
-{% extends 'base.html' %} {% block nav %}
-
-<div class="topnav">
-	<a href="{{url_for('home')}}">Home</a>
-	<a class="active" href="{{url_for('showProperties')}}">Properties</a>
-	<a href="{{url_for('showTenants')}}">Tenants</a>
-</div>
-{% endblock %} {% block body %}
+{% extends 'base.html' %} {% block body %}
 
 <div>
 	<p>{{property.title}}</p>
 	<p>{{property.streetAddress}}</p>
+	{% if property.unitNumber != None %}
 	<p>{{property.unitNumber}}</p>
+	{% endif %}
 	<p>{{property.city}}</p>
 	<p>{{property.state}}</p>
 	<p>{{property.zipCode}}</p>
@@ -23,7 +18,7 @@
 <div>
 	<h2>Tenants</h2>
 	{% for tenant in tenants %}
-	<p>Name: {{tenant.name}}</p>
+	<p>Name: {{tenant.first_name}} {{tenant.last_name}}</p>
 	<p>Phone Number: {{tenant.phone}}</p>
 	<p>Email: {{tenant.email}}</p>
 	<a href="{{url_for('editTenant', tenant_id=tenant.id)}}">Edit</a>

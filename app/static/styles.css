@@ -49,3 +49,7 @@ body {
 	font-size: large;
 	padding: 0;
 }
+
+.welcome-msg {
+	font-weight: bold;
+}

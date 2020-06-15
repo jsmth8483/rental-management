@@ -1,4 +1,6 @@
 .vscode
-database_test.py
+db_setup.py
 rentalmanagement.db
 .env
+*.pyc
+*.pyo
